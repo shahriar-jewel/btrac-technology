@@ -14,7 +14,7 @@ import cron from "node-cron";
 // Providers
 import { SMTPMailer } from "./providers/SMTPMailer";
 import { UserProvider } from "./providers/UserProvider";
-import { WeightDataProvider } from "./providers/WeightDataProvider";
+import { HomeProvider } from "./providers/api/HomeProvider";
 
 // Formatters
 import { dateFormatter } from "./ftms/date";
@@ -22,6 +22,7 @@ import { dateFormatter } from "./ftms/date";
 // Controllers
 import { LoginController } from "./controllers/LoginController";
 import { DashboardController } from "./controllers/DashboardController";
+import { HomeController } from "./controllers/api/HomeController";
 
 // Crons
 import { SendReportMail } from "./crons/SendReportMail";
@@ -46,7 +47,7 @@ app.viewEngine("pug");
 app.setStatic(path.join(__dirname, "public"), { maxAge: 0 }); // 31557600000 turned off caching for now
 
 app.set("UserProvider", new UserProvider());
-app.set("WeightDataProvider", new WeightDataProvider());
+app.set("HomeProvider", new HomeProvider());
 
 
 // Initialize and set the mailer to use
@@ -71,6 +72,7 @@ app.setFormatter("date", dateFormatter);
 // Lets register the controllers
 app.registerController(LoginController);
 app.registerController(DashboardController);
+app.registerController(HomeController);
 
 
 

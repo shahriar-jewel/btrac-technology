@@ -1,13 +1,11 @@
 import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import { Role } from "../core/IUserProvider";
-import { IWeightDataProvider } from "../core/IWeightDataProvider";
 import { IUserProvider } from "../core/IUserProvider";
 
 
 export class DashboardController extends Controller {
 
-    private WeightDataProvider: IWeightDataProvider;
     private UserProvider: IUserProvider;
 
     public onRegister(): void {
@@ -18,12 +16,12 @@ export class DashboardController extends Controller {
      * Shall provide the dashboard interface with stats data
      */
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        res.bag.pageTitle = "Weight Link | Dashboard"
+        res.bag.pageTitle = "b-Trac Technology | Dashboard"
         const stats: any = [];
 
-        stats.total_sessions = await this.WeightDataProvider.count();
-        stats.today_sessions = await this.WeightDataProvider.todayCount();
-        stats.total_users = await this.UserProvider.count();
+        stats.total_sessions = 1;
+        stats.today_sessions = 2;
+        stats.total_users = 3;
 
         res.bag.stats = stats;
         res.view('dashboard/admin');
